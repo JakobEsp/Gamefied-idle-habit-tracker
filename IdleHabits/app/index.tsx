@@ -1,5 +1,9 @@
 import { Text, View } from "react-native";
 
+if (__DEV__) {
+  require("../ReactotronConfig");
+}
+
 export default function Index() {
   return (
     <View
