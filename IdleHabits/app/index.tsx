@@ -1,3 +1,5 @@
+import { Button } from "@react-navigation/elements";
+import { Link, router } from "expo-router";
 import { Text, View } from "react-native";
 
 if (__DEV__) {
@@ -5,6 +7,11 @@ if (__DEV__) {
 }
 
 export default function Index() {
+
+  async function login(){
+    router.replace("/logged-in/home");
+  }
+
   return (
     <View
       style={{
@@ -13,7 +20,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Button onPress={login}>Login</Button>
     </View>
   );
 }
