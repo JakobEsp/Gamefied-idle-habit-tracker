@@ -1,10 +1,7 @@
-import { Button } from "@react-navigation/elements";
 import { Link, router } from "expo-router";
-import { Text, View } from "react-native";
+import { View, Button } from "react-native";
+import TextInput from "../components/TextInput";
 
-if (__DEV__) {
-  require("../ReactotronConfig");
-}
 
 export default function Index() {
 
@@ -12,15 +9,21 @@ export default function Index() {
     router.replace("/logged-in/home");
   }
 
+
   return (
     <View
       style={{
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        paddingHorizontal: 20,
+        gap: 10,
       }}
     >
-      <Button onPress={login}>Login</Button>
+      <TextInput/>
+      <TextInput/>
+      <Link href="/register" >register</Link>
+      <Button onPress={login} title="Login" />
     </View>
   );
 }

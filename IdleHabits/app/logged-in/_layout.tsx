@@ -9,6 +9,7 @@ export default function RootLayout() {
       tabBarShowLabel: false,
       tabBarActiveTintColor: "#121212",
     }} 
+    backBehavior="order"
   >
     <Tabs.Screen
       name="home"
