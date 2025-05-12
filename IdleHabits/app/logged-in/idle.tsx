@@ -1,17 +1,36 @@
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
+import ItemCell, { ItemCellProps } from "../../components/cells/ItemCell";
 
 
 
 export default function Idle() {
+
+
+  const testData: ItemCellProps[] = [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+  ]
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+    <FlatList
+      contentContainerStyle={{
+        padding: 20,
+        gap: 10
       }}
-    >
-      <Text>Edit app/idle.tsx to edit this screen.</Text>
-    </View>
+      data={testData}
+      numColumns={2}
+      columnWrapperStyle={{
+         gap: 10,
+      }}
+      renderItem={item => <ItemCell {...item} />}
+    />
   );
 }

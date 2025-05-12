@@ -1,6 +1,7 @@
 import { Link, router } from "expo-router";
-import { View, Button } from "react-native";
+import { View } from "react-native";
 import TextInput from "../components/TextInput";
+import Button from "../components/Button";
 
 
 export default function Index() {

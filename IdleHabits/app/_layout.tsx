@@ -1,6 +1,4 @@
-import { AntDesign, MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons";
-import { router, Stack, Tabs } from "expo-router";
-import { useEffect } from "react";
+import { Stack } from "expo-router";
 
 
 if (__DEV__) {

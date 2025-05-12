@@ -1,16 +1,30 @@
-import { Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
+import HabitCell, { HabitCellProps } from "../../components/cells/HabitCell";
 
 
 export default function Index() {
+
+  const testData: HabitCellProps[] = [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+  ]
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+      <FlatList
+      contentContainerStyle={{
+        padding: 20,
+        gap: 10,
       }}
-    >
-      <Text>Edit app/home.tsx to edit this screen.</Text>
-    </View>
+      data={testData}
+      renderItem={item => <HabitCell {...item} />}
+      />
   );
 }

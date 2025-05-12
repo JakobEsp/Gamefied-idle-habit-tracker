@@ -1,6 +1,7 @@
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 import TextInput from "../components/TextInput";
 import { Link, router } from "expo-router";
+import Button from "../components/Button";
 
 export default function Register() {
 
