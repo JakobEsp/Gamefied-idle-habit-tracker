@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import colors from "../../styles/colors";
+import Text from "../Text";
 
 
 export interface ItemCellProps {
@@ -15,8 +16,10 @@ export default function ItemCell(props: ItemCellProps) {
             <View
                 style={styles.image_cell}
             >
-
             </View>
+            <Text
+            
+            >Fat fish</Text>
         </View>
     )
 }
@@ -24,7 +27,6 @@ export default function ItemCell(props: ItemCellProps) {
 const styles = StyleSheet.create({
     cell:{
         flex: 1,
-        height: 200,
         borderWidth: 1,
         borderColor: colors.black,
         borderRadius: 5,

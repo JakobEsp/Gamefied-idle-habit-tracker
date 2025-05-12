@@ -1,7 +1,8 @@
 import { FlatList, Text, View } from "react-native";
-import HabitCell, { HabitCellProps } from "../../components/cells/HabitCell";
-import Button from "../../components/Button";
-import colors from "../../styles/colors";
+import Button from "../../../components/Button";
+import colors from "../../../styles/colors";
+import { router } from "expo-router";
+import HabitCell, { HabitCellProps } from "../../../components/cells/HabitCell";
 
 
 export default function Index() {
@@ -43,6 +44,7 @@ export default function Index() {
         <Button
         title="+"
         color={colors.white}
+        onPress={() => router.navigate("/logged-in/home/habitDetails")}
         ></Button>
       </View>
     </>
