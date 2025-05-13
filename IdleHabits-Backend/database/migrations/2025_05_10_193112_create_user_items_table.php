@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Item;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,11 @@ return new class extends Migration
     {
         Schema::create('user_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Item::class);
+            $table->unsignedInteger('quantity'); // how many of this item the user has
+            $table->unsignedBigInteger('gold_yield');
+            $table->unsignedInteger('frequency'); // in milliseconds, how often the item will yield gold
+            $table->unsignedInteger('level')->default(1); // the level of the item
             $table->timestamps();
         });
     }

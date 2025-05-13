@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\UserHabit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,8 @@ return new class extends Migration
     {
         Schema::create('habit_completions', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(UserHabit::class);
+            $table->string('value');// value corresponding to the type of habit
             $table->timestamps();
         });
     }
