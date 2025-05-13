@@ -81,7 +81,9 @@ class ApiAuthController extends Controller
      */
     public function user(Request $request)
     {
-        //
+        return response()->json([
+            'user' => $request->user(),
+        ]);
     }
 
 }
