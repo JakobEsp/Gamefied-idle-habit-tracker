@@ -1,36 +1,18 @@
 import { View, Text, FlatList } from "react-native";
 import ItemCell, { ItemCellProps } from "../../../components/cells/ItemCell";
-
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import IdleItemsView from "../../../views/idle/items";
+import IdleUpgradesView from "../../../views/idle/upgrades";
+  
 
 
 export default function Idle() {
-
-
-  const testData: ItemCellProps[] = [
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-  ]
+  const Tab = createMaterialTopTabNavigator();
 
   return (
-    <FlatList
-      contentContainerStyle={{
-        padding: 20,
-        gap: 10
-      }}
-      data={testData}
-      numColumns={2}
-      columnWrapperStyle={{
-         gap: 10,
-      }}
-      renderItem={item => <ItemCell {...item} />}
-    />
-  );
+    <Tab.Navigator>
+      <Tab.Screen name="Items" component={IdleItemsView} />
+      <Tab.Screen name="Upgrades" component={IdleUpgradesView} />
+    </Tab.Navigator>
+  )
 }

@@ -9,6 +9,7 @@ export default function RootLayout() {
       tabBarShowLabel: false,
       headerShown: false,
       tabBarActiveTintColor: "#121212",
+      animation: 'shift'
     }} 
     backBehavior="order"
   >
