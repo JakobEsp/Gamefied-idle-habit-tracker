@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import colors from "../../styles/colors";
 import Checkbox from 'expo-checkbox';
+import { router } from "expo-router";
 
 
 export interface HabitCellProps {
@@ -23,7 +24,7 @@ return(
        <Checkbox
             style={styles.checkbox}
             value={false}
-            onValueChange={() => {}}
+            onValueChange={() => router.navigate("/logged-in/home/completeHabit")}
             color={colors.black}
             disabled={false}
        />

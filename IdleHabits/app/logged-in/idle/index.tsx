@@ -1,5 +1,5 @@
 import { View, Text, FlatList } from "react-native";
-import ItemCell, { ItemCellProps } from "../../components/cells/ItemCell";
+import ItemCell, { ItemCellProps } from "../../../components/cells/ItemCell";
 
 
 

@@ -7,6 +7,7 @@ export default function RootLayout() {
     screenOptions={{
       headerTitleAlign: 'center', 
       tabBarShowLabel: false,
+      headerShown: false,
       tabBarActiveTintColor: "#121212",
     }} 
     backBehavior="order"
