@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Item;
 use App\Models\User;
+use App\Models\UserItem;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +62,17 @@ class ApiAuthController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        Item::all()->each(function ($item) use($user) {
+            $user->items()->create([
+                'item_id' => $item->id,
+                'quantity' => 0,
+                'gold_yield' => $item->base_gold,
+                'frequency' => $item->base_frequency,
+                'level' => 1,
+                'image_path' => $item->getImagePath()
+            ]);
+        });
 
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
