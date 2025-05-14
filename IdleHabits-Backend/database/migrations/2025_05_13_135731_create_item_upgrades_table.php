@@ -15,9 +15,8 @@ return new class extends Migration
         Schema::create('item_upgrades', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Item::class);
-            $table->string('names'); // comma-separated list of upgrade names
             $table->unsignedInteger('base_price'); // base price of the upgrade
-            $table->unsignedTinyInteger('price_multiplieriplier');
+            $table->double('price_multiplier');
         });
     }
 

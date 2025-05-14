@@ -13,7 +13,6 @@ class ItemUpgrade extends Model
 
     protected $fillable = [
         'item_id',
-        'names',
         'base_gold',
         'price_multiplieriplier',
     ];
