@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserHabit extends Model
 {
     //
+    protected $fillable = [
+
+    ];
 }

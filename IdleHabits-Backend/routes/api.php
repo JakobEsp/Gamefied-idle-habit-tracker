@@ -13,5 +13,4 @@ Route::prefix('/user')->group(function(){
         Route::post('/logout', [ApiAuthController::class, 'logout']);
         Route::get('/', [ApiAuthController::class, 'user']);
     });
-
 });
