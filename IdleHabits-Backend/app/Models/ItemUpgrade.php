@@ -15,7 +15,7 @@ class ItemUpgrade extends Model
         'item_id',
         'names',
         'base_gold',
-        'price_multiplier',
+        'price_multiplieriplier',
     ];
 
 

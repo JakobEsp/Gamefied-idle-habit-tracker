@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(Item::class);
             $table->string('names'); // comma-separated list of upgrade names
             $table->unsignedInteger('base_price'); // base price of the upgrade
-            $table->unsignedTinyInteger('price_multiplier');
+            $table->unsignedTinyInteger('price_multiplieriplier');
         });
     }
 
