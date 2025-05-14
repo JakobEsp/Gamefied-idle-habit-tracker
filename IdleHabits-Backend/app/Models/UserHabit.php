@@ -13,6 +13,10 @@ use Illuminate\Validation\Rule;
 class UserHabit extends Model
 {
     //
+    protected $appends = [
+        'completed',
+    ];
+
     protected $fillable = [
         'user',
         'name',

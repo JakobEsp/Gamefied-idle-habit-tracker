@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\UserHabit;
+use App\Models\HabitCompletion;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserHabitRequest extends FormRequest
+class CompleteUserHabitRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class UpdateUserHabitRequest extends FormRequest
      */
     public function rules(): array
     {
-        return UserHabit::rules();
-
+        return HabitCompletion::rules();
+        
     }
 }
