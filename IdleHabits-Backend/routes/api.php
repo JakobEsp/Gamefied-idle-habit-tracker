@@ -26,5 +26,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('/{habitCompletion}/uncomplete', [UserHabitController::class, 'uncomplete']);
     });
     
-    Route::apiResource('/items', UserItemController::class);
+    Route::prefix('/items')->group(function(){
+        Route::get('', [UserItemController::class, 'index']);
+        Route::post('/{item}/buy', [UserItemController::class, 'buyItem']);
+    });
+    Route::prefix('/upgrades')->group(function(){
+        Route::get('', [UserItemController::class, 'upgrades']);
+        Route::post('/{item}/buy', [UserItemController::class, 'buyUpgrade']);
+    });
 });

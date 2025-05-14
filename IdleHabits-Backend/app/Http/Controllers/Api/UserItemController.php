@@ -7,46 +7,34 @@ use App\Http\Controllers\Controller;
 use App\Models\UserItem;
 use App\Http\Requests\StoreUserItemRequest;
 use App\Http\Requests\UpdateUserItemRequest;
+use App\Models\ItemUpgrade;
+use Illuminate\Http\Request;
 
 class UserItemController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all user items
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return response()->json([
+            "items" => $request->user()->items
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreUserItemRequest $request)
-    {
-        //
+    public function buyItem(Request $request, UserItem $item) {
+        $item->quantity = $item->quantity + 1;
+        $item->save();
+        return response()->json([
+            "item aquired"
+        ]);  
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(UserItem $userItem)
-    {
-        //
+    public function upgrades(){
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateUserItemRequest $request, UserItem $userItem)
-    {
-        //
-    }
+    public function buyUpgrade(ItemUpgrade $itemUpgrade){
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(UserItem $userItem)
-    {
-        //
     }
 }

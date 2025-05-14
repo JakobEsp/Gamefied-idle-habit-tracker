@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-
-
-
+    
     public function casts(): array
     {
         return [
@@ -17,7 +15,6 @@ class Item extends Model
         ];
     }
     
-
     public function getImagePath(): string{
         switch ($this->name){
             case ItemName::POTATO_BATTERY:
