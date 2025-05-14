@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('user_items', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Item::class);
+            $table->string('image_path');
             $table->unsignedInteger('quantity'); // how many of this item the user has
             $table->unsignedBigInteger('gold_yield');
             $table->unsignedInteger('frequency'); // in milliseconds, how often the item will yield gold

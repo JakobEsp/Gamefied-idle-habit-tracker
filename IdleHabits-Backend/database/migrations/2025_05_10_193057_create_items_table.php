@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image_path');
             $table->unsignedMediumInteger('base_price');
             $table->unsignedInteger('base_frequency'); // in milliseconds, how often the item will yield gold
             $table->unsignedInteger('base_gold'); // how much gold the item will yield
