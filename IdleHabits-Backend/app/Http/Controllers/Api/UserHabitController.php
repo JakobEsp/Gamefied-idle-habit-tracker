@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\UserHabit;
 use App\Http\Requests\StoreUserHabitRequest;
 use App\Http\Requests\UpdateUserHabitRequest;
+use App\Models\User;
+use App\Models\UserItem;
 
 class UserHabitController extends Controller
 {
@@ -23,7 +25,7 @@ class UserHabitController extends Controller
      */
     public function store(StoreUserHabitRequest $request)
     {
-        //
+        $request->user()->habits()->create($request->all());
     }
 
     /**
