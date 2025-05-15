@@ -1,4 +1,7 @@
+import { IBaseFormValidationResponse } from "../models/responses";
 import { IUser } from "../models/user";
+
+
 
 interface ILoginParams {
     email: string,
@@ -6,8 +9,8 @@ interface ILoginParams {
     device_name: string
 }
 
-interface  ILoginResponse {
-    token: string,
+interface  ILoginResponse extends IBaseFormValidationResponse<ILoginParams> {
+    token: string
     user: IUser
 }
 
@@ -19,6 +22,7 @@ export async function postLogin(params: ILoginParams){
         body: JSON.stringify(params)
     });
     const json = await response.json();
+    console.log(json)
     return json as ILoginResponse;
 }
 

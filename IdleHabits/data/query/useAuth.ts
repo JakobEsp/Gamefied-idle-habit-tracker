@@ -4,10 +4,7 @@ import { useState } from "react";
 
 
 export default function useLoginMutation(){
-    const [mutation] = useState(
-        useMutation({
+    return useMutation({
         mutationFn: postLogin
     })
-    )
-    return mutation;
 }
