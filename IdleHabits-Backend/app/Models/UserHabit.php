@@ -25,6 +25,10 @@ class UserHabit extends Model
         'type',
     ];
 
+    protected $hidden = [
+        "user_id"
+    ];
+
     public function casts(): array
     {
         return [
