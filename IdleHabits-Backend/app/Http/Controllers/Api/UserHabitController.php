@@ -7,22 +7,35 @@ use App\Http\Requests\CompleteUserHabitRequest;
 use App\Models\UserHabit;
 use App\Http\Requests\StoreUserHabitRequest;
 use App\Http\Requests\UpdateUserHabitRequest;
+use App\Http\Resources\HabitCollection;
 use App\Models\HabitCompletion;
-use App\Models\User;
-use App\Models\UserItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserHabitController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get User Habits
+     * @response{
+     *  "habits": [
+     *  {
+     *       "id": 1,
+     *       "name": "hit the griddy",
+     *       "effort": 1,
+     *       "frequency": "daily",
+     *       "type": "checkbox",
+     *       "created_at": "2025-05-15T07:16:52.000000Z",
+     *       "updated_at": "2025-05-15T07:16:52.000000Z",
+     *       "completed": false
+     *  }
+     * ]
+     * }
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json([
-            'habits' => Auth::user()->habits
-        ]);
+        return [
+            "habits" => $request->user()->habits
+        ];
     }
 
     /**
