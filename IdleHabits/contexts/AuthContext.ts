@@ -26,6 +26,7 @@ export function createAuthContext(): IAuthContext{
             if(localToken){
                 console.log('found local token')
                 setToken(localToken)
+                await attemptLogin()
             }
             setIsLoading(false)
         }
