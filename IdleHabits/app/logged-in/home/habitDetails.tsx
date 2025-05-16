@@ -4,13 +4,16 @@ import Button from "../../../components/Button";
 import containers from "../../../styles/containers";
 import { useEffect, useState } from "react";
 import EffortPicker from "../../../components/EffortPicker";
-import { effort } from "../../../data/models/habit";
+import { effort, frequency } from "../../../data/models/habit";
+import { useCreateHabitMutation } from "../../../data/query/useHabits";
+import { SegmentedButtons } from "react-native-paper";
 
 
 export default function HabitDetails() {
-
+    const {mutateAsync: submit, data, isPending} = useCreateHabitMutation();
     const [effort, setEffort] = useState<effort>(1)
-
+    const [name, setName] = useState("");
+    const [frequency, setFrequency] = useState<frequency>('daily')
     useEffect(() => {
         
 
@@ -22,10 +25,18 @@ export default function HabitDetails() {
         >
             <TextInput
                 label="name"
+                value={name}
+                onChangeText={text => setName(text)}
+                errorText={data?.errors?.name}
             />
             <EffortPicker effort={effort} setEffort={effort => setEffort(effort)}/>
+            <SegmentedButtons
+                value={frequency}
+                onValueChange={setFrequency}
+                buttons={[{value: 'daily', label:'Daily'},{value: 'weekly', label:'Weekly'}]}
+            />
             {/* Effort picker */}
-            <Button>Create</Button>
+            <Button onPress={() => submit({effort, name, frequency})} disabled={false}>Create</Button>
         </View>
     )
 }

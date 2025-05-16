@@ -54,15 +54,15 @@ export default function Index() {
         label="Email"
         value={email}
         onChangeText={text => setEmail(text)}
+        errorText={data?.errors?.email}
         />
-      <Text >{data?.errors?.email}</Text>
 
       <TextInput
         label="Password"
         value={password}
         onChangeText={text => setPassword(text)}
+        errorText={data?.errors?.password}
       />
-      <Text>{data?.errors?.password}</Text>
       <Link href="/register" >register</Link>
       <Button 
         onPress={login} 

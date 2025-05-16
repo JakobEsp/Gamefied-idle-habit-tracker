@@ -4,7 +4,7 @@ import colors from "../../../styles/colors";
 import { router } from "expo-router";
 import HabitCell from "../../../components/cells/HabitCell";
 import { useGetHabitsQuery } from "../../../data/query/useHabits";
-import { IconButton } from "react-native-paper";
+import { FAB, IconButton } from "react-native-paper";
 
 
 export default function Index() {
@@ -29,23 +29,16 @@ export default function Index() {
       refreshing={isLoading}
       refreshControl={<RefreshControl refreshing={isLoading}/>}
       />
-      <View
-       style={{
-        width: 100,
-        position: "absolute",
-        bottom: 0,
-        right: 0,
-        marginBottom: 20,
-        justifyContent: "center",
-       }}
-      >
-        <IconButton 
-          icon='plus'
-          size={30}
-          mode="contained-tonal"
-          onPress={() => router.navigate("/logged-in/home/habitDetails")}  
-        />
-      </View>
+      <FAB
+        icon={'plus'}
+        style={{        
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          margin: 20
+        }}
+        onPress={() => router.navigate("/logged-in/home/habitDetails")}  
+      />
     </>
   );
 }
