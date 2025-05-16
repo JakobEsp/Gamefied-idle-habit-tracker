@@ -1,24 +1,16 @@
-import { FlatList, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, RefreshControl, Text, View } from "react-native";
 import Button from "../../../components/Button";
 import colors from "../../../styles/colors";
 import { router } from "expo-router";
 import HabitCell, { HabitCellProps } from "../../../components/cells/HabitCell";
+import { useGetHabitsQuery } from "../../../data/query/useHabits";
 
 
 export default function Index() {
 
-  const testData: HabitCellProps[] = [
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-  ]
+
+  const {data, isLoading,refetch} = useGetHabitsQuery()
+
 
   return (
     <>
@@ -28,8 +20,12 @@ export default function Index() {
         gap: 10,
         paddingBottom: 120,
       }}
-      data={testData}
-      renderItem={item => <HabitCell {...item} />}
+
+      data={data?.habits}
+      renderItem={({item}) => <HabitCell {...item} />}
+      onRefresh={refetch}
+      refreshing={isLoading}
+      refreshControl={<RefreshControl refreshing={isLoading}/>}
       />
       <View
        style={{

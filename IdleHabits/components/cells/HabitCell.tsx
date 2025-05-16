@@ -2,13 +2,14 @@ import { StyleSheet, View } from "react-native";
 import colors from "../../styles/colors";
 import Checkbox from 'expo-checkbox';
 import { router } from "expo-router";
+import { IHabit } from "../../data/models/habit";
 
 
 export interface HabitCellProps {
 
 }
 
-export default function HabitCell(props: HabitCellProps) {
+export default function HabitCell(props: IHabit) {
 
 return(
     <View
