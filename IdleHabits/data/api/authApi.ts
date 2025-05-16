@@ -3,7 +3,7 @@ import { IUser } from "../models/user";
 import { getFetch, postFetch } from "../utils";
 
 
-interface ILoginParams {
+export interface ILoginParams {
     email: string,
     password: string,
     device_name: string

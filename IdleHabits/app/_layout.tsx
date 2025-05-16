@@ -1,6 +1,6 @@
 import { router, Stack } from "expo-router";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useRef, useState } from "react";
 import { AuthContext, createAuthContext } from "../contexts/AuthContext";
 import Text from "../components/Text";
 
@@ -22,12 +22,16 @@ export default function RootLayout() {
 // extracted because queryclient need to be mounted
 function NavigationWithAuthContext(){
   const authContext = createAuthContext();
+  const previousUser = useRef(authContext.user)
 
-  // useEffect(() => {
-  //   console.log('authcontext changed')
-  //   if(authContext.user) // this is ok for now, user just should not be refetched
-  //     router.replace('/logged-in/home')
-  // }, [authContext])
+  useEffect(() => {
+    console.log('authcontext changed')
+    if(authContext.user && !previousUser.current) // this is ok for now, user just should not be refetched
+      {
+        previousUser.current = authContext.user
+        router.replace('/logged-in/home')
+      }
+  }, [authContext])
       
   return (
     <AuthContext.Provider value={authContext}>
