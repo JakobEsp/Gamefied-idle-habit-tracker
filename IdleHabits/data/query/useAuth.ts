@@ -4,7 +4,7 @@ import { useState } from "react";
 import { IMutationOptions, IQueryOptions } from "../models/queryOptions";
 
 
-export default function useLoginMutation(options: IMutationOptions<ILoginResponse, ILoginParams>){
+export default function useLoginMutation(options?: IMutationOptions<ILoginResponse, ILoginParams>){
     return useMutation({
         mutationFn: postLogin,
         ...options

@@ -2,8 +2,9 @@ import { ActivityIndicator, FlatList, RefreshControl, Text, View } from "react-n
 import Button from "../../../components/Button";
 import colors from "../../../styles/colors";
 import { router } from "expo-router";
-import HabitCell, { HabitCellProps } from "../../../components/cells/HabitCell";
+import HabitCell from "../../../components/cells/HabitCell";
 import { useGetHabitsQuery } from "../../../data/query/useHabits";
+import { IconButton } from "react-native-paper";
 
 
 export default function Index() {
@@ -19,6 +20,7 @@ export default function Index() {
         padding: 20,
         gap: 10,
         paddingBottom: 120,
+        flexGrow:1,
       }}
 
       data={data?.habits}
@@ -37,11 +39,12 @@ export default function Index() {
         justifyContent: "center",
        }}
       >
-        <Button
-        title="+"
-        color={colors.white}
-        onPress={() => router.navigate("/logged-in/home/habitDetails")}
-        ></Button>
+        <IconButton 
+          icon='plus'
+          size={30}
+          mode="contained-tonal"
+          onPress={() => router.navigate("/logged-in/home/habitDetails")}  
+        />
       </View>
     </>
   );

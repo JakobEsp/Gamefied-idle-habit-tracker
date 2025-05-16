@@ -3,19 +3,25 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
 import { createContext, useEffect, useMemo, useRef, useState } from "react";
 import { AuthContext, createAuthContext } from "../contexts/AuthContext";
 import Text from "../components/Text";
+import { DefaultTheme, PaperProvider } from "react-native-paper";
 
 if (__DEV__) {
   require("../ReactotronConfig");
 }
+
+const theme = {
+  ...DefaultTheme
+}
+
 const queryClient = new QueryClient()
 
 
 export default function RootLayout() {
 
   return (
-    <QueryClientProvider client={queryClient} >
-      <NavigationWithAuthContext/>
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient} >
+        <NavigationWithAuthContext/>
+      </QueryClientProvider>
   )
 }
 
@@ -35,11 +41,13 @@ function NavigationWithAuthContext(){
       
   return (
     <AuthContext.Provider value={authContext}>
+      <PaperProvider theme={theme}>
       {authContext.isLoading ?
-        <Text>loading..</Text>
+          <Text>loading..</Text>
         :
-        <Stack screenOptions={{headerShown: false}} initialRouteName={authContext.user ? 'logged-in' : 'index'}/>
-      }
+          <Stack screenOptions={{headerShown: false}} initialRouteName={authContext.user ? 'logged-in' : 'index'}/>
+        }
+      </PaperProvider>
     </AuthContext.Provider>
   )
 }

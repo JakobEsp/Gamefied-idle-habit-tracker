@@ -3,25 +3,51 @@ import colors from "../../styles/colors";
 import Checkbox from 'expo-checkbox';
 import { router } from "expo-router";
 import { IHabit } from "../../data/models/habit";
+import { Card, IconButton } from "react-native-paper";
+import { useCallback } from "react";
+import { Feather } from "@expo/vector-icons";
+import EffortPicker from "../EffortPicker";
 
 
-export interface HabitCellProps {
-
-}
 
 export default function HabitCell(props: IHabit) {
+
+const AvatarMaybe = useCallback(() => {
+    return (
+       <IconButton  icon="file-edit-outline" size={25} onPress={() => router.navigate("/logged-in/home/habitDetails")}/> 
+    )
+},[props.id])
 
 return(
     <View
         style={styles.container}
     >  
-
-        <View 
-            style={styles.cell}
+        <View
+            style={styles.cardContainer}
         >
+            <Card
+            mode="outlined"
+            style={{
+                width: '100%',
+                height: '100%'
+            }}
+            >
+                <IconButton  icon="file-edit-outline" size={25}
+                    style={{position:'absolute', end:0, zIndex: 99}}
+                    onPress={() => router.navigate("/logged-in/home/habitDetails")}
+                /> 
+                <Card.Title 
+                    title={props.name}
+                    // left={AvatarMaybe}
+                    subtitle={"repeats: " + props.frequency}    
+                />
+                <Card.Content>
+                    <EffortPicker effort={props.effort}/>
+                </Card.Content>
+            </Card>
 
         </View>
-        
+
        <Checkbox
             style={styles.checkbox}
             value={false}
@@ -41,12 +67,9 @@ const styles = StyleSheet.create({
         gap: 10,
         alignItems: "center",
     },
-    cell: {
+    cardContainer: {
         flex: 1,
-        height: 200,
-        borderWidth: 1,
-        borderColor: colors.black,
-        borderRadius: 5
+        height: 130,
     },
     checkbox: {
         borderWidth: 1,
