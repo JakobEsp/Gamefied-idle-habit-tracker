@@ -1,6 +1,6 @@
 import { IBaseFormValidationResponse } from "../models/responses";
 import { IUser } from "../models/user";
-import { postFetch } from "../utils";
+import { getFetch, postFetch } from "../utils";
 
 
 interface ILoginParams {
@@ -9,16 +9,16 @@ interface ILoginParams {
     device_name: string
 }
 
-interface  ILoginResponse extends IBaseFormValidationResponse<ILoginParams> {
+export interface  ILoginResponse extends IBaseFormValidationResponse<ILoginParams> {
     token: string
     user: IUser
 }
 
+export interface IGetUserResponse extends Omit<ILoginResponse, 'token'> {}
+
 export async function postLogin(params: ILoginParams){
-    const apiUrl = process.env.EXPO_PUBLIC_API_BASE ?? "";
-    const response = await postFetch(`${apiUrl}/user/login`, params)
+    const response = await postFetch(`/user/login`, params)
     const json = await response.json();
-    console.log(json)
     return json as ILoginResponse;
 }
 
@@ -27,5 +27,8 @@ export async function postRegister(){
 }
 
 export async function getUser(){
-
+    const response = await getFetch('/user');
+    const json = await response.json();
+    console.log(json);
+    return json as IGetUserResponse
 }

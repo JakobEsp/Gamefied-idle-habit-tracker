@@ -8,6 +8,7 @@ import * as Device from 'expo-device';
 import Text from "../components/Text";
 import { StackActions } from "@react-navigation/native";
 import { AuthContext } from "../contexts/AuthContext";
+import { setTokenAsync } from "../data/asyncStorageUtils";
 
 
 export default function Index() {
@@ -17,12 +18,15 @@ export default function Index() {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    console.log("data")
-    console.log(data)
-    if(data?.token && data.user){
-      authContext.setToken(data.token)
-      authContext.setUser(data.user)
+    async function handleData(){
+      console.log("data")
+      console.log(data)
+      if(data?.token && data.user){
+        await setTokenAsync(data.token)
+        authContext.setUser(data.user)
+      }
     }
+    if(data)handleData();
   }, [data])
 
   async function login(){

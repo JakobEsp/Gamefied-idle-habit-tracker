@@ -1,19 +1,29 @@
-import { useContext } from "react"
+import { useContext, useMemo } from "react"
 import { AuthContext } from "../contexts/AuthContext"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
-const headers: HeadersInit = { Accept: "application/json", "Content-Type": "application/json" }
 
-export async function getFetch<T>(url: string, params: T){
-    return fetch(url, {
-        headers,
-        body: JSON.stringify(params)
+async function getHeaders(){
+    const token = await AsyncStorage.getItem('token')
+    return { 
+        Accept: "application/json", 
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}` 
+    }
+}
+
+export async function getFetch<T>(path: string){
+    const apiUrl = process.env.EXPO_PUBLIC_API_BASE
+    return fetch(apiUrl + path, {
+        headers: await getHeaders(),
     })
 }
 
-export async function postFetch<T>(url: string, params: T){
-    return fetch(url, {
+export async function postFetch<T>(path: string, params: T){
+    const apiUrl = process.env.EXPO_PUBLIC_API_BASE
+    return fetch(apiUrl + path, {
         method: 'POST',
-        headers,
+        headers: await getHeaders(),
         body: JSON.stringify(params)
     })
 }

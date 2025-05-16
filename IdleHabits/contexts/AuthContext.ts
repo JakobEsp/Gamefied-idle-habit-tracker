@@ -1,11 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createContext, Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from "react"
 import { IUser } from "../data/models/user"
-import useLoginMutation from "../data/query/useAuth"
+import useLoginMutation, { useGetUserQuery } from "../data/query/useAuth"
+import { getTokenAsync } from "../data/asyncStorageUtils"
 
 interface IAuthContext {
-    token?: string
-    setToken: Dispatch<SetStateAction<IAuthContext['token']>>
+
     isLoading: boolean
     setIsLoading: Dispatch<SetStateAction<IAuthContext['isLoading']>>
     user?: IUser,
@@ -15,36 +15,37 @@ interface IAuthContext {
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export function createAuthContext(): IAuthContext{
-    
+    const {refetch} = useGetUserQuery({
+        enabled: false
+    });
     const [isLoading, setIsLoading] = useState<IAuthContext['isLoading']>(true)
-    const [token, setToken] = useState<IAuthContext['token']>();
     const [user, setUser] = useState<IUser>()
 
     useEffect(() => {
         async function checkLocalStorage(){
-            const localToken = await AsyncStorage.getItem('token')
+            const localToken = await getTokenAsync();
             if(localToken){
-                console.log('found local token')
-                setToken(localToken)
-                await attemptLogin()
+                await attemptGetUser()
             }
             setIsLoading(false)
         }
         checkLocalStorage()
     }, [])
 
-    const attemptLogin = useCallback(async () => {
-        //get user, if success set user with resposne
+    const attemptGetUser = useCallback(async () => {
+        //get user, if success set user with response
+        const response = await refetch()
+        if(response.data?.user){
+            setUser(response.data.user)
+        }
     }, [])
 
     const context = useMemo<IAuthContext>(() => ({
-        token,
-        setToken,
         isLoading,
         setIsLoading,
         user,
         setUser
-    }), [token, setToken, isLoading, setIsLoading, user, setUser])
+    }), [isLoading, setIsLoading, user, setUser])
 
     return context;
 }

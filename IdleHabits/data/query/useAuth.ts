@@ -1,6 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getUser, postLogin } from "../api/authApi";
+import { QueryClient, UndefinedInitialDataOptions, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getUser, IGetUserResponse, postLogin } from "../api/authApi";
 import { useState } from "react";
+import { IQueryOptions } from "../models/queryOptions";
 
 
 export default function useLoginMutation(){
@@ -10,10 +11,11 @@ export default function useLoginMutation(){
 }
 
 
-
-export function useGetUserQuery(){
+const GetUserQueryKey = ['user']
+export function useGetUserQuery(options: IQueryOptions<IGetUserResponse>, queryClient?: QueryClient){
     return useQuery({
-        queryKey: ['user'],
-        queryFn: getUser
+        queryKey: GetUserQueryKey,
+        queryFn: getUser,
+        ...options
     })
 }

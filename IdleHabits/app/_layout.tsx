@@ -11,23 +11,31 @@ const queryClient = new QueryClient()
 
 
 export default function RootLayout() {
-  const authContext = createAuthContext();
-
-  useEffect(() => {
-    console.log('authcontext changed')
-    if(authContext.user)
-      router.replace('/logged-in/home')
-  }, [authContext])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthContext.Provider value={authContext}>
-        {authContext.isLoading ?
-          <Text>loading..</Text>
-          :
-          <Stack screenOptions={{headerShown: false}} initialRouteName={'index'}/>
-        }
-      </AuthContext.Provider>
+    <QueryClientProvider client={queryClient} >
+      <NavigationWithAuthContext/>
     </QueryClientProvider>
+  )
+}
+
+// extracted because queryclient need to be mounted
+function NavigationWithAuthContext(){
+  const authContext = createAuthContext();
+
+  // useEffect(() => {
+  //   console.log('authcontext changed')
+  //   if(authContext.user) // this is ok for now, user just should not be refetched
+  //     router.replace('/logged-in/home')
+  // }, [authContext])
+      
+  return (
+    <AuthContext.Provider value={authContext}>
+      {authContext.isLoading ?
+        <Text>loading..</Text>
+        :
+        <Stack screenOptions={{headerShown: false}} initialRouteName={authContext.user ? 'logged-in' : 'index'}/>
+      }
+    </AuthContext.Provider>
   )
 }
