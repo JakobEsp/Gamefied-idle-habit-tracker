@@ -1,9 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import colors from "../../styles/colors";
-import Checkbox from 'expo-checkbox';
 import { router } from "expo-router";
 import { IHabit } from "../../data/models/habit";
-import { Card, IconButton, Menu } from "react-native-paper";
+import { Card, Checkbox, IconButton, Menu } from "react-native-paper";
 import { useCallback, useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import EffortPicker from "../EffortPicker";
@@ -22,6 +21,7 @@ const {mutateAsync: deleteHabit} = useDeleteHabitMutation({
     }
 }) 
 const [showMenu, setShowMenu] = useState(false)
+const [completed, setCompleted] = useState(props.completed)
 
 const AvatarMaybe = useCallback(() => {
     return (
@@ -79,13 +79,20 @@ return(
 
         </View>
 
-       <Checkbox
+        <Checkbox
+            status={completed ? 
+                'checked'
+                :
+                'unchecked'
+            }
+        />
+       {/* <Checkbox
             style={styles.checkbox}
             value={false}
             onValueChange={() => router.navigate("/logged-in/home/completeHabit")}
             color={colors.black}
             disabled={false}
-       />
+       /> */}
     </View>
 )
 }
