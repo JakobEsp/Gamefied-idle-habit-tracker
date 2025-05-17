@@ -1,6 +1,7 @@
 import { QueryClient, UndefinedInitialDataOptions, useMutation, useQuery } from "@tanstack/react-query";
-import { getHabits, ICompleteHabitParams, ICreateHabitParams, ICreateHabitResponse, IGetHabitsResponse, postComplete, postHabit } from "../api/habitApi";
+import { deleteHabit, getHabits, ICompleteHabitParams, ICreateHabitParams, ICreateHabitResponse, IGetHabitsResponse, postComplete, postHabit } from "../api/habitApi";
 import { IMutationOptions, IQueryOptions } from "../models/queryOptions";
+import { IHabit } from "../models/habit";
 
 
 
@@ -11,7 +12,7 @@ export function useCreateHabitMutation(options?: IMutationOptions<ICreateHabitRe
     })
 }
 
-const GetHabitsQueryKey = ['habits']
+export const GetHabitsQueryKey = ['habits']
 export function useGetHabitsQuery(options?: IQueryOptions<IGetHabitsResponse>){
     return useQuery({
         queryKey: GetHabitsQueryKey,
@@ -27,3 +28,9 @@ export function useCompleteHabitMutation(options?: IMutationOptions<boolean, ICo
     })
 }
 
+export function useDeleteHabitMutation(options?: IMutationOptions<boolean, {id: IHabit['id']}>){
+    return useMutation({
+        mutationFn: deleteHabit,
+        ...options
+    })
+}

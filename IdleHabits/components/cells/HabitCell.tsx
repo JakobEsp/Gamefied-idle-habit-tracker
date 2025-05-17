@@ -3,14 +3,25 @@ import colors from "../../styles/colors";
 import Checkbox from 'expo-checkbox';
 import { router } from "expo-router";
 import { IHabit } from "../../data/models/habit";
-import { Card, IconButton } from "react-native-paper";
-import { useCallback } from "react";
+import { Card, IconButton, Menu } from "react-native-paper";
+import { useCallback, useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import EffortPicker from "../EffortPicker";
+import { GetHabitsQueryKey, useDeleteHabitMutation } from "../../data/query/useHabits";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 
 export default function HabitCell(props: IHabit) {
+const queryClient = useQueryClient()
+const {mutateAsync: deleteHabit} = useDeleteHabitMutation({
+    onSuccess: () => {
+        queryClient.invalidateQueries({
+            queryKey: GetHabitsQueryKey
+        })
+    }
+}) 
+const [showMenu, setShowMenu] = useState(false)
 
 const AvatarMaybe = useCallback(() => {
     return (
@@ -32,10 +43,7 @@ return(
                 height: '100%'
             }}
             >
-                <IconButton  icon="file-edit-outline" size={25}
-                    style={{position:'absolute', end:0, zIndex: 99}}
-                    onPress={() => router.navigate("/logged-in/home/habitDetails")}
-                /> 
+
                 <Card.Title 
                     title={props.name}
                     // left={AvatarMaybe}
@@ -44,6 +52,29 @@ return(
                 <Card.Content>
                     <EffortPicker effort={props.effort}/>
                 </Card.Content>
+
+                <View 
+                    style={{
+                        position: 'absolute',
+                        alignSelf:'flex-end'
+                    }}
+                >
+                <Menu
+                    visible={showMenu}
+                    onDismiss={() => setShowMenu(false)}
+                    anchorPosition="bottom"
+                    anchor={
+                        <IconButton
+                            icon="file-edit-outline"
+                            size={25}
+                            onPress={() => setShowMenu(true)}
+                        />
+                    }
+                >
+                    <Menu.Item title="Delete" onPress={() => {deleteHabit({id: props.id})}} />
+                </Menu>
+                </View>
+
             </Card>
 
         </View>

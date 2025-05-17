@@ -11,6 +11,7 @@ use App\Http\Resources\HabitCollection;
 use App\Models\HabitCompletion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserHabitController extends Controller
 {
@@ -44,6 +45,9 @@ class UserHabitController extends Controller
     public function store(StoreUserHabitRequest $request)
     {
         $request->user()->habits()->create($request->all());
+        return response()->json([
+            'success' => true
+        ]);
     }
 
     /**
@@ -71,9 +75,15 @@ class UserHabitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserHabit $userHabit)
+    public function destroy(Request $request, UserHabit $habit)
     {
-        $userHabit->delete();
+        if ($habit->user_id !== $request->user()->id) {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 403);
+        }
+
+        $habit->delete();
         return response()->json([
             'message' => 'Habit deleted successfully'
         ]);

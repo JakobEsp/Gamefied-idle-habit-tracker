@@ -1,6 +1,6 @@
 import { effort, frequency, IHabit } from "../models/habit"
 import { IBaseFormValidationResponse } from "../models/responses"
-import { getFetch, postFetch } from "../utils"
+import { deleteFetch, getFetch, postFetch } from "../utils"
 
 
 
@@ -36,5 +36,10 @@ export async function getHabits(){
 export async function postComplete({ id, ...params }: { id: IHabit['id'] } & ICompleteHabitParams){
     const response = await postFetch(`/habits/${id}/complete`, params)
     // const json = await response.json()
+    return !!(response.status == 200)
+}
+
+export async function deleteHabit({id}: {id: IHabit['id']}){
+    const response = await deleteFetch(`/habits/${id}`);
     return !!(response.status == 200)
 }

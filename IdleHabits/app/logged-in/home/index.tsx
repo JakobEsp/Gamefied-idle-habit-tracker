@@ -9,9 +9,7 @@ import { FAB, IconButton } from "react-native-paper";
 
 export default function Index() {
 
-
-  const {data, isLoading,refetch} = useGetHabitsQuery()
-
+  const {data, isLoading, refetch} = useGetHabitsQuery()
 
   return (
     <>
@@ -22,12 +20,9 @@ export default function Index() {
         paddingBottom: 120,
         flexGrow:1,
       }}
-
       data={data?.habits}
       renderItem={({item}) => <HabitCell {...item} />}
-      onRefresh={refetch}
-      refreshing={isLoading}
-      refreshControl={<RefreshControl refreshing={isLoading}/>}
+      refreshControl={<RefreshControl onRefresh={refetch} refreshing={isLoading}/>}
       />
       <FAB
         icon={'plus'}

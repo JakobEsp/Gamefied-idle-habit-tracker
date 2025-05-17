@@ -27,3 +27,11 @@ export async function postFetch<T>(path: string, params: T){
         body: JSON.stringify(params)
     })
 }
+
+export async function deleteFetch(path: string){
+    const apiUrl = process.env.EXPO_PUBLIC_API_BASE
+    return fetch(apiUrl + path, {
+        method: 'DELETE',
+        headers: await getHeaders()
+    });
+}
