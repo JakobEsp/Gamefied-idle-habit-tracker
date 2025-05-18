@@ -15,7 +15,6 @@ export default function HabitCell(props: IHabit) {
 const queryClient = useQueryClient()
 const {mutateAsync: completeApiCall} = useCompleteHabitMutation({
     onSuccess:() => {
-        console.log('susses')
     }
 })
 const {mutateAsync: deleteHabit} = useDeleteHabitMutation({

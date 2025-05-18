@@ -6,7 +6,7 @@ import useLoginMutation from "../data/query/useAuth";
 import { useContext, useEffect, useState } from "react";
 import * as Device from 'expo-device';
 import Text from "../components/Text";
-import { StackActions } from "@react-navigation/native";
+import * as ScreenOrientation from 'expo-screen-orientation';
 import { AuthContext } from "../contexts/AuthContext";
 import { setTokenAsync } from "../data/asyncStorageUtils";
 
@@ -28,6 +28,10 @@ export default function Index() {
     }
     if(data)handleData();
   }, [data])
+
+  async function changeScreenOrientation(){
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT)
+  }
 
   async function login(){
     console.log("tihi")
@@ -63,7 +67,7 @@ export default function Index() {
         onChangeText={text => setPassword(text)}
         errorText={data?.errors?.password}
       />
-      <Link href="/register" >register</Link>
+      <Link href="/register" onPress={changeScreenOrientation}>register</Link>
       <Button 
         onPress={login} 
         disabled={isPending}>
