@@ -6,13 +6,18 @@ import { Card, Checkbox, IconButton, Menu } from "react-native-paper";
 import { useCallback, useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import EffortPicker from "../EffortPicker";
-import { GetHabitsQueryKey, useDeleteHabitMutation } from "../../data/query/useHabits";
+import { GetHabitsQueryKey, useCompleteHabitMutation, useDeleteHabitMutation } from "../../data/query/useHabits";
 import { useQueryClient } from "@tanstack/react-query";
 
 
 
 export default function HabitCell(props: IHabit) {
 const queryClient = useQueryClient()
+const {mutateAsync: completeApiCall} = useCompleteHabitMutation({
+    onSuccess:() => {
+        console.log('susses')
+    }
+})
 const {mutateAsync: deleteHabit} = useDeleteHabitMutation({
     onSuccess: () => {
         queryClient.invalidateQueries({
@@ -21,7 +26,12 @@ const {mutateAsync: deleteHabit} = useDeleteHabitMutation({
     }
 }) 
 const [showMenu, setShowMenu] = useState(false)
-const [completed, setCompleted] = useState(props.completed)
+const [completed, setCompleted] = useState(!!props.completed)
+
+async function completeHabit(){
+    setCompleted(true)
+    completeApiCall({id: props.id, value: 'true'})
+}
 
 const AvatarMaybe = useCallback(() => {
     return (
@@ -80,11 +90,9 @@ return(
         </View>
 
         <Checkbox
-            status={completed ? 
-                'checked'
-                :
-                'unchecked'
-            }
+            disabled={completed}
+            status={completed ? 'checked':'unchecked'}
+                onPress={() => completeHabit()}
         />
        {/* <Checkbox
             style={styles.checkbox}

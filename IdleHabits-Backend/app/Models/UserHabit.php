@@ -62,9 +62,10 @@ class UserHabit extends Model
             case HabitFrequency::DAILY:
                 return $this->completions()->whereDate('created_at', now())->exists();
             case HabitFrequency::WEEKLY:
-                return $this->completions()->whereDate('created_at', now()->startOfWeek())->exists();
+                return $this->completions()
+                    ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+                    ->exists();
         }
     }
-
 
 }
