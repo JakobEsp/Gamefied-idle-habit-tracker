@@ -49,7 +49,8 @@ return(
             mode="outlined"
             style={{
                 width: '100%',
-                height: '100%'
+                height: '100%',
+                backgroundColor: colors.white
             }}
             >
 
@@ -88,18 +89,11 @@ return(
 
         </View>
 
-        <Checkbox
+        <Checkbox.Android
             disabled={completed}
             status={completed ? 'checked':'unchecked'}
                 onPress={() => completeHabit()}
         />
-       {/* <Checkbox
-            style={styles.checkbox}
-            value={false}
-            onValueChange={() => router.navigate("/logged-in/home/completeHabit")}
-            color={colors.black}
-            disabled={false}
-       /> */}
     </View>
 )
 }

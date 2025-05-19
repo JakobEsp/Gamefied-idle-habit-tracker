@@ -1,14 +1,15 @@
 import { AntDesign, MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import colors from "../../styles/colors";
 
-export default function RootLayout() {
+export default function LoggedInLayout() {
   return (
   <Tabs 
     screenOptions={{
       headerTitleAlign: 'center', 
       tabBarShowLabel: false,
       headerShown: false,
-      tabBarActiveTintColor: "#121212",
+      tabBarActiveTintColor: colors.black,
       animation: 'shift'
     }} 
     backBehavior="order"

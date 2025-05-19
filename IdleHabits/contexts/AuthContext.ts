@@ -2,14 +2,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createContext, Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from "react"
 import { IUser } from "../data/models/user"
 import useLoginMutation, { useGetUserQuery } from "../data/query/useAuth"
-import { getTokenAsync } from "../data/asyncStorageUtils"
+import { getTokenAsync, setTokenAsync } from "../data/asyncStorageUtils"
 
 interface IAuthContext {
 
     isLoading: boolean
     setIsLoading: Dispatch<SetStateAction<IAuthContext['isLoading']>>
-    user?: IUser,
+    user?: IUser
     setUser: Dispatch<SetStateAction<IAuthContext['user']>>
+    logout: () => Promise<void>
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -40,12 +41,18 @@ export function createAuthContext(): IAuthContext{
         }
     }, [])
 
+    const logout = useCallback(async () => {
+        setUser(undefined)
+        setTokenAsync("")
+    }, [user])
+
     const context = useMemo<IAuthContext>(() => ({
         isLoading,
         setIsLoading,
         user,
-        setUser
-    }), [isLoading, setIsLoading, user, setUser])
+        setUser,
+        logout
+    }), [isLoading, setIsLoading, user, setUser, logout])
 
     return context;
 }

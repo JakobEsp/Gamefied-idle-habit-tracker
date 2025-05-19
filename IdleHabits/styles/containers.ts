@@ -6,8 +6,8 @@ const containers = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         paddingHorizontal: 20,
-        gap: 10,
+        gap: 10    
     }
 })
 
-export default containers;  
+export default containers;

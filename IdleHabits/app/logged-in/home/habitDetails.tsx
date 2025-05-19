@@ -27,10 +27,6 @@ export default function HabitDetails() {
     const [effort, setEffort] = useState<effort>(1)
     const [name, setName] = useState("");
     const [frequency, setFrequency] = useState<frequency>('daily')
-    useEffect(() => {
-        
-
-    }, [])
 
     return (
         <View
