@@ -9,6 +9,18 @@ export interface ILoginParams {
     device_name: string
 }
 
+export interface IRegisterParams {
+    name: string,
+    email: string,
+    password: string,
+    password_confirmation: string
+}
+
+export interface IRegisterResponse extends IBaseFormValidationResponse<IRegisterParams>{
+    user: IUser
+    token: string
+}
+
 export interface  ILoginResponse extends IBaseFormValidationResponse<ILoginParams> {
     token: string
     user: IUser
@@ -22,8 +34,10 @@ export async function postLogin(params: ILoginParams){
     return json as ILoginResponse;
 }
 
-export async function postRegister(){
-    return await fetch("");
+export async function postRegister(params: IRegisterParams){
+    const response = await postFetch("/user/register", params);
+    const json = await response.json()
+    return json;
 }
 
 export async function getUser(){

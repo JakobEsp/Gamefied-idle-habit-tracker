@@ -26,22 +26,20 @@ export default function RootLayout() {
       // console.log(ok.accelerationIncludingGravity)
       const {x, y, z} = ok.accelerationIncludingGravity;
       const test = Math.round(y * 10) / 10;
-      console.log(x,y,z)
-      console.log(Math.floor(x))
       const xFloor = Math.floor(x)
-      if(xFloor < 6 && xFloor > -6){
+      if(xFloor < 9 && xFloor > -9){
         // portrait
-        console.log('portait')
+        // console.log('portait')
         if(y < 0){
           //normal
-          console.log('normal')
+          // console.log('normal')
           await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
         }else{
            await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_DOWN)
           //turned around
         }
       }else {
-        console.log('landscape')
+        // console.log('landscape')
         if(x > y){
           //tiltet right
           await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT)
@@ -55,7 +53,7 @@ export default function RootLayout() {
     })
 
   ScreenOrientation.addOrientationChangeListener(orientatio => {
-    console.log('why not working')
+    console.log('orientation change')
     console.log(orientatio)
   })
 

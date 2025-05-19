@@ -10,6 +10,7 @@ export default function CustomTextInput({errorText, ...props}: ITextInputProps )
         <>
         <NativeTextInput
             {...props}
+            mode="outlined"
             style={{
                 backgroundColor: "#e8e8e8",
                 width: '100%'
