@@ -11,6 +11,7 @@ const headerLeft = useCallback(() => {
       <View>
         <Menu
         visible={showMenu}
+        onDismiss={() => setShowMenu(false)}
           anchor={
             <IconButton  icon="account" size={25} onPress={() => setShowMenu(true)}/> 
           }
@@ -24,8 +25,8 @@ const headerLeft = useCallback(() => {
 
 export default function RootLayout() {
   return (
-    <Stack screenOptions={{headerTitleAlign: 'center', headerLeft}}>
-      <Stack.Screen name="index" options={{title: 'Home'}}/>
+    <Stack screenOptions={{headerTitleAlign: 'center'}}>
+      <Stack.Screen name="index" options={{title: 'Home', headerLeft}}/>
       <Stack.Screen name="habitDetails"  options={{title: 'Habit', presentation: 'formSheet'}}/>
     </Stack>
   );

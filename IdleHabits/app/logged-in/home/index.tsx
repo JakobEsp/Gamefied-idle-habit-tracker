@@ -5,17 +5,19 @@ import { router } from "expo-router";
 import HabitCell from "../../../components/cells/HabitCell";
 import { useGetHabitsQuery } from "../../../data/query/useHabits";
 import { FAB, IconButton } from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
 export default function Index() {
-
+  const insets = useSafeAreaInsets()
   const {data, isLoading, refetch} = useGetHabitsQuery()
 
   return (
     <>
       <FlatList
       contentContainerStyle={{
-        padding: 20,
+        paddingVertical: 20,
+        paddingHorizontal: 20 + insets.left,
         gap: 10,
         paddingBottom: 120,
         flexGrow:1,

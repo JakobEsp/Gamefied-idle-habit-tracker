@@ -32,7 +32,7 @@ export default function RootLayout() {
       const {x, y, z} = ok.accelerationIncludingGravity;
       // const test = Math.round(y * 10) / 10;
       const xFloor = Math.floor(x)
-      if(xFloor < 9 && xFloor > -9){
+      if(xFloor < 6 && xFloor > -6){
         // portrait
         // console.log('portait')
         if(y < 0){
