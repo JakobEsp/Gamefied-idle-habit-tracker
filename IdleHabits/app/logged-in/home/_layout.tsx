@@ -13,7 +13,7 @@ const headerLeft = useCallback(() => {
         visible={showMenu}
         onDismiss={() => setShowMenu(false)}
           anchor={
-            <IconButton  icon="account" size={25} onPress={() => setShowMenu(true)}/> 
+            <IconButton  icon="account-circle-outline" size={30} onPress={() => setShowMenu(true)}/> 
           }
           anchorPosition="bottom"
         >
